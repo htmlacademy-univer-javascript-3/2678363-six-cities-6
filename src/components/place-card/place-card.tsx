@@ -36,3 +36,5 @@ function PlaceCard() {
     </article>
   );
 }
+
+export default PlaceCard;
