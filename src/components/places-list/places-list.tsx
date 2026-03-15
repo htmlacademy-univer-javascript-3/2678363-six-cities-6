@@ -7,7 +7,7 @@ type PlacesListProps = {
 }
 
 function PlacesList({ offers }: PlacesListProps): JSX.Element {
-  const [ activeCard, setActiveCard ] = useState<Offer | null>(null);
+  const [ , setActiveCard ] = useState<Offer | null>(null);
 
   const handleCardMouseEnter = (offer: Offer) => {
     setActiveCard(offer);
