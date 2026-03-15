@@ -1,4 +1,4 @@
-export const Offers = {
+export const Places = {
   PlacesCount: 312
 };
 
