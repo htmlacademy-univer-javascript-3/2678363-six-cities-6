@@ -1,17 +1,18 @@
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import { Offer } from '../../types/offer';
 
 type AppComponentProps = {
   placesCount: number;
+  offers: Offer[];
 }
 
-function App({placesCount}: AppComponentProps): JSX.Element {
+function App({placesCount, offers}: AppComponentProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,17 +26,11 @@ function App({placesCount}: AppComponentProps): JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
-            >
-              <FavoritesPage />
-            </PrivateRoute>
-          }
+          element={<FavoritesPage offers={offers} />}
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage />}
+          element={<OfferPage offers={offers} />}
         />
         <Route
           path='*'
