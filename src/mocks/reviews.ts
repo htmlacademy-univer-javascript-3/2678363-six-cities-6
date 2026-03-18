@@ -1,4 +1,4 @@
-import { Review } from '../types/review';
+import { Review } from '../types/offer';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 

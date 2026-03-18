@@ -1,11 +1,16 @@
 import PlacesList from '../../components/places-list/places-list.tsx';
 import { offers } from '../../mocks/offers.ts';
+import Map from '../../components/map/map.tsx';
+import { City, Point, Points } from '../../types/map.ts';
 
 type MainPageProps = {
   placesCount: number;
+  city: City;
+  points: Points;
+  selectedPoint: Point | undefined;
 }
 
-function MainPage({placesCount}: MainPageProps): JSX.Element {
+function MainPage({placesCount, city, points, selectedPoint }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -98,7 +103,9 @@ function MainPage({placesCount}: MainPageProps): JSX.Element {
               <PlacesList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={city} points={points} selectedPoint={selectedPoint} />
+              </section>
             </div>
           </div>
         </div>

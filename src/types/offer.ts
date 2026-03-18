@@ -19,3 +19,12 @@ export type Offer = {
   goods: string[];
   host: Host;
 }
+
+export type Review = {
+  id: number;
+  avatar: string;
+  name: string;
+  rate: number;
+  date: string;
+  description: string;
+}
