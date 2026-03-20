@@ -4,27 +4,25 @@ import { useState } from 'react';
 
 type PlacesListProps = {
   offers: Offer[];
+  onSelect?: (offer: Offer | null) => void;
 }
 
-function PlacesList({ offers }: PlacesListProps): JSX.Element {
+function PlacesList({ offers, onSelect }: PlacesListProps): JSX.Element {
   const [ , setActiveCard ] = useState<Offer | null>(null);
 
-  const handleCardMouseEnter = (offer: Offer) => {
+  const handleSelect = (offer: Offer | null) => {
     setActiveCard(offer);
+    if (onSelect) {
+      onSelect(offer);
+    }
   };
-
-  const handleCardMouseLeave = () => {
-    setActiveCard(null);
-  };
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
         <PlaceCard
           key={offer.id}
           offer={offer}
-          onMouseEnter={handleCardMouseEnter}
-          onMouseLeave={handleCardMouseLeave}
+          onSelect={handleSelect}
         />
       ))}
     </div>

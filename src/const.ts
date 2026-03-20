@@ -1,7 +1,3 @@
-export const Places = {
-  PlacesCount: 312
-};
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -15,8 +11,4 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export const URL_MARKER_DEFAULT =
-  'public/img/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  'public/img/pin-active.svg';
+export const URL_MARKER_DEFAULT = 'public/img/pin.svg';
