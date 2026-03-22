@@ -6,19 +6,21 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { Offer } from '../../types/offer';
+import { City, Points } from '../../types/map';
 
 type AppComponentProps = {
-  placesCount: number;
   offers: Offer[];
+  city: City;
+  points: Points;
 }
 
-function App({placesCount, offers}: AppComponentProps): JSX.Element {
+function App({ offers, city, points }: AppComponentProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage placesCount={placesCount} />}
+          element={<MainPage city={city} points={points} />}
         />
         <Route
           path={AppRoute.Login}

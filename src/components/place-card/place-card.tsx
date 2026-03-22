@@ -4,22 +4,21 @@ import { Offer } from '../../types/offer';
 
 type PlaceCardProps = {
   offer: Offer;
-  onMouseEnter?: (offer: Offer) => void;
-  onMouseLeave?: () => void;
+  onSelect?: (offer: Offer | null) => void;
 }
 
-function PlaceCard({ offer , onMouseEnter, onMouseLeave }: PlaceCardProps): JSX.Element {
+function PlaceCard({ offer, onSelect }: PlaceCardProps): JSX.Element {
   const { id, picture, isPremium, price, title, type, isFavorite } = offer;
 
   const handleMouseEnter = () => {
-    if (onMouseEnter) {
-      onMouseEnter(offer);
+    if (onSelect) {
+      onSelect(offer);
     }
   };
 
   const handleMouseLeave = () => {
-    if (onMouseLeave) {
-      onMouseLeave();
+    if (onSelect) {
+      onSelect(null);
     }
   };
 

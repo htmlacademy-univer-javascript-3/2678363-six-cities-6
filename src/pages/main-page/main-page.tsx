@@ -1,11 +1,14 @@
 import PlacesList from '../../components/places-list/places-list.tsx';
 import { offers } from '../../mocks/offers.ts';
+import Map from '../../components/map/map.tsx';
+import { City, Points } from '../../types/map.ts';
 
 type MainPageProps = {
-  placesCount: number;
+  city: City;
+  points: Points;
 }
 
-function MainPage({placesCount}: MainPageProps): JSX.Element {
+function MainPage({ city, points }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -79,7 +82,7 @@ function MainPage({placesCount}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">312 places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex ={0}>
@@ -98,7 +101,9 @@ function MainPage({placesCount}: MainPageProps): JSX.Element {
               <PlacesList offers={offers} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={city} points={points} />
+              </section>
             </div>
           </div>
         </div>
