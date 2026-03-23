@@ -8,6 +8,8 @@ import { URL_MARKER_DEFAULT } from '../../const';
 type MapProps = {
   city: City;
   points: Points;
+  height: number;
+  width?: number;
 };
 
 const defaultCustomIcon = new Icon({
@@ -17,7 +19,7 @@ const defaultCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, points } = props;
+  const {city, points, height, width} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -42,7 +44,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, points]);
 
-  return <div style={{height: '767px'}} ref={mapRef}></div>;
+  return <div style={{height: `${height}px`, width: `${width}px`, margin: '0 auto'}} ref={mapRef}></div>;
 }
 
 export default Map;

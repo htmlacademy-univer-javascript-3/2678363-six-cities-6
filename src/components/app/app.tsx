@@ -5,11 +5,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { Offer } from '../../types/offer';
+import { Offers } from '../../types/offer';
 import { City, Points } from '../../types/map';
 
 type AppComponentProps = {
-  offers: Offer[];
+  offers: Offers;
   city: City;
   points: Points;
 }

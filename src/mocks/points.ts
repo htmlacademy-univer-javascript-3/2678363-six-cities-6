@@ -1,6 +1,6 @@
 import {Points} from '../types/map';
 
-export const POINTS: Points = [
+export const points: Points = [
   {
     title: 'Excellent service and maximum comfort in the heart of the city',
     lat: 52.3909553943508,

@@ -1,8 +1,8 @@
-import { Offer } from '../types/offer';
+import { Offers } from '../types/offer';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
-export const offers: Offer[] = [
+export const offers: Offers = [
   {
     id: 1,
     picture: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/116705550.jpg?k=40b0a5d60341b25b0b6d4759eb95b50b32933f27eb36098420744ab965e367e0&o=',
@@ -17,7 +17,7 @@ export const offers: Offer[] = [
     isPremium: false,
     price: 350,
     title: 'Excellent service and maximum comfort in the heart of the city',
-    type: 'hotel',
+    type: 'Hotel',
     bedrooms: 4,
     adults: 8,
     isFavorite: false,
@@ -46,7 +46,7 @@ export const offers: Offer[] = [
     isPremium: false,
     price: 190,
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'apartment',
+    type: 'Apartment',
     bedrooms: 3,
     adults: 6,
     isFavorite: true,
@@ -72,7 +72,7 @@ export const offers: Offer[] = [
     isPremium: false,
     price: 420,
     title: 'Spacious house with all amenities for your stay',
-    type: 'house',
+    type: 'House',
     bedrooms: 4,
     adults: 6,
     isFavorite: true,
@@ -102,7 +102,7 @@ export const offers: Offer[] = [
     isPremium: false,
     price: 135,
     title: 'Cozy & comfortable room at great location',
-    type: 'room',
+    type: 'Room',
     bedrooms: 1,
     adults: 1,
     isFavorite: false,
