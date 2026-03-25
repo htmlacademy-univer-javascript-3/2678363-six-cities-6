@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
+import { Variant } from '../../const';
 
 
 type PlaceCardProps = {
   offer: Offer;
   onSelect?: (offer: Offer | null) => void;
+  variant?: Variant.Cities | Variant.NearPlaces;
 }
 
-function PlaceCard({ offer, onSelect }: PlaceCardProps): JSX.Element {
+function PlaceCard({ offer, onSelect, variant = Variant.Cities }: PlaceCardProps): JSX.Element {
   const { id, picture, isPremium, price, title, type, isFavorite } = offer;
 
   const handleMouseEnter = () => {
@@ -22,9 +24,29 @@ function PlaceCard({ offer, onSelect }: PlaceCardProps): JSX.Element {
     }
   };
 
+  const getCardClassName = (): string => {
+    switch (variant) {
+      case Variant.NearPlaces:
+        return 'near-places__card place-card';
+      case Variant.Cities:
+      default:
+        return 'cities__card place-card';
+    }
+  };
+
+  const getImageWrapperClassName = (): string => {
+    switch (variant) {
+      case Variant.NearPlaces:
+        return 'near-places__image-wrapper place-card__image-wrapper';
+      case Variant.Cities:
+      default:
+        return 'cities__image-wrapper place-card__image-wrapper';
+    }
+  };
+
   return (
     <article
-      className="cities__card place-card"
+      className={getCardClassName()}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -33,7 +55,7 @@ function PlaceCard({ offer, onSelect }: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={getImageWrapperClassName()}>
         <a href="#">
           <img className="place-card__image" src={picture} width="260" height="200" alt="Place image" />
         </a>
@@ -44,11 +66,16 @@ function PlaceCard({ offer, onSelect }: PlaceCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={`place-card__bookmark-button button ${
+              isFavorite ? 'place-card__bookmark-button--active' : ''
+            }`}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">{isFavorite ? '' : 'To bookmarks'}</span>
+            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <div className="place-card__rating rating">

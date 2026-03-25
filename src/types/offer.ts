@@ -20,6 +20,8 @@ export type Offer = {
   host: Host;
 }
 
+export type Offers = Offer[];
+
 export type Review = {
   id: number;
   avatar: string;
