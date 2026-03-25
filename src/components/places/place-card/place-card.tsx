@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/offer';
-import { Variant } from '../../const';
+import { Offer } from '../../../types/offer';
+import { Variant } from '../../../const';
 
 
 type PlaceCardProps = {

@@ -2,7 +2,7 @@ import { Offers } from '../types/offer';
 
 const AVATAR_URL = 'https://i.pravatar.cc/128';
 
-export const offers: Offers = [
+export const OFFERS: Offers = [
   {
     id: 1,
     picture: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/116705550.jpg?k=40b0a5d60341b25b0b6d4759eb95b50b32933f27eb36098420744ab965e367e0&o=',

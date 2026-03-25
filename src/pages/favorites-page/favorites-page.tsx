@@ -1,5 +1,5 @@
 import { Offers } from '../../types/offer';
-import PlaceCard from '../../components/place-card/place-card';
+import PlaceCard from '../../components/places/place-card/place-card';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 
