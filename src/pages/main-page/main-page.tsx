@@ -1,17 +1,20 @@
 import PlacesList from '../../components/places/places-list/places-list.tsx';
-import { OFFERS } from '../../mocks/offers.ts';
 import Map from '../../components/map/map.tsx';
-import { City, Points } from '../../types/map.ts';
 import { Variant } from '../../const.ts';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
 import { CITIES } from '../../mocks/cities.ts';
+import { useAppSelector } from '../../hooks/index.ts';
+import { getCity, getFilteredOffers } from '../../store/selectors.ts';
+import { getPointsFromOffers } from '../../utils.ts';
 
-type MainPageProps = {
-  city: City;
-  points: Points;
-}
+function MainPage(): JSX.Element {
+  const currentCityName = useAppSelector(getCity);
+  const filteredOffers = useAppSelector(getFilteredOffers);
 
-function MainPage({ city, points }: MainPageProps): JSX.Element {
+  const currentCity = CITIES.find((city) => city.title === currentCityName) || CITIES[0];
+
+  const points = getPointsFromOffers(filteredOffers);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -50,7 +53,9 @@ function MainPage({ city, points }: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{points.length} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {filteredOffers.length} {filteredOffers.length === 1 ? 'place' : 'places'} to stay in {currentCityName}
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex ={0}>
@@ -66,11 +71,11 @@ function MainPage({ city, points }: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlacesList offers={OFFERS} variant={Variant.Cities} />
+              <PlacesList offers={filteredOffers} variant={Variant.Cities} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} points={points} height={767} />
+                <Map city={currentCity} points={points} height={767} />
               </section>
             </div>
           </div>

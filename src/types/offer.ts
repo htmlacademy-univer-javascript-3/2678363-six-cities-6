@@ -1,3 +1,5 @@
+import { City } from './map';
+
 export type Host = {
   name: string;
   avatar: string;
@@ -18,6 +20,11 @@ export type Offer = {
   rating: number;
   goods: string[];
   host: Host;
+  city: City;
+  location: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export type Offers = Offer[];
