@@ -5,10 +5,10 @@ import { AppRoute, Variant } from '../../const';
 import ReviewForm from '../../components/reviews/review-form/review-form';
 import { reviews } from '../../mocks/reviews';
 import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
-import { city } from '../../mocks/city';
+import { CITIES } from '../../mocks/cities';
 import { nearPoints } from '../../mocks/near-points';
 import Map from '../../components/map/map';
-import PlacesList from '../../components/places-list/places-list';
+import PlacesList from '../../components/places/places-list/places-list';
 import { nearOffers } from '../../mocks/near-offers';
 
 type OfferPageProps = {
@@ -24,7 +24,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
     return <NotFoundPage />;
   }
 
-  const { title, gallery, type, bedrooms, adults, isFavorite, rating, goods, host } = offer;
+  const { title, gallery, type, price, bedrooms, adults, isFavorite, rating, goods, host } = offer;
 
   return (
     <div className="page">
@@ -108,7 +108,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -150,7 +150,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
           </div>
           <section className="offer__map map">
             <Map
-              city={city}
+              city={CITIES[3]}
               points={nearPoints}
               height={579}
               width={1144}

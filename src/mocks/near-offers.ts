@@ -1,4 +1,5 @@
 import { Offers } from '../types/offer';
+import { CITIES } from './cities';
 
 export const nearOffers: Offers = [
   {
@@ -18,6 +19,11 @@ export const nearOffers: Offers = [
       name: 'John',
       avatar: 'https://i.pravatar.cc/128?rnd=1',
       isPro: false
+    },
+    city: CITIES[3],
+    location: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
     }
   },
   {
@@ -37,6 +43,11 @@ export const nearOffers: Offers = [
       name: 'Emma',
       avatar: 'https://i.pravatar.cc/128?rnd=2',
       isPro: true
+    },
+    city: CITIES[3],
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
     }
   },
   {
@@ -56,6 +67,11 @@ export const nearOffers: Offers = [
       name: 'Michael',
       avatar: 'https://i.pravatar.cc/128?rnd=3',
       isPro: true
+    },
+    city: CITIES[3],
+    location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198
     }
   }
 ];

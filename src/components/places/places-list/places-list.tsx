@@ -1,7 +1,7 @@
 import PlaceCard from '../place-card/place-card';
-import { Offer, Offers } from '../../types/offer';
+import { Offer, Offers } from '../../../types/offer';
 import { useState } from 'react';
-import { Variant } from '../../const';
+import { Variant } from '../../../const';
 
 type PlacesListProps = {
   offers: Offers;

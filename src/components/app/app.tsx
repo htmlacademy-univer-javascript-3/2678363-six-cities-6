@@ -5,22 +5,18 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { Offers } from '../../types/offer';
-import { City, Points } from '../../types/map';
+import { useAppSelector } from '../../hooks';
+import { getOffersList } from '../../store/selectors';
 
-type AppComponentProps = {
-  offers: Offers;
-  city: City;
-  points: Points;
-}
+function App(): JSX.Element {
+  const offers = useAppSelector(getOffersList);
 
-function App({ offers, city, points }: AppComponentProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage city={city} points={points} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Login}
