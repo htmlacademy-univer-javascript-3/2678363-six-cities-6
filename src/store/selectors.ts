@@ -9,3 +9,25 @@ export const getFilteredOffers = (state: State): Offers =>
   state.offersList.filter((offer) => offer.city.title === state.city);
 
 export const getFilteredOffersCount = (state: State): number => getFilteredOffers(state).length;
+
+export const getSortType = (state: State): string => state.sortType;
+
+
+const sortOffers = (offers: Offers, sortType: string): Offers => {
+  switch (sortType) {
+    case 'Price: low to high':
+      return [...offers].sort((a, b) => a.price - b.price);
+    case 'Price: high to low':
+      return [...offers].sort((a, b) => b.price - a.price);
+    case 'Top rated first':
+      return [...offers].sort((a, b) => b.rating - a.rating);
+    case 'Popular':
+    default:
+      return [...offers];
+  }
+};
+
+export const getSortedFilteredOffers = (state: State): Offers => {
+  const filteredOffers = getFilteredOffers(state);
+  return sortOffers(filteredOffers, state.sortType);
+};
