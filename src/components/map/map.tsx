@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { City, Point, Points } from '../../types/map';
 import useMap from '../../hooks/use-map';
 import { Icon, layerGroup, Marker } from 'leaflet';
-import { URL_MARKER_DEFAULT } from '../../const';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
   city: City;
@@ -15,6 +15,12 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
@@ -42,7 +48,11 @@ function Map(props: MapProps): JSX.Element {
         });
 
         marker
-          .setIcon(defaultCustomIcon)
+          .setIcon(
+            selectedPoint !== null && selectedPoint !== undefined && point.title === selectedPoint.title
+              ? currentCustomIcon
+              : defaultCustomIcon
+          )
           .addTo(markerLayer);
       });
 
