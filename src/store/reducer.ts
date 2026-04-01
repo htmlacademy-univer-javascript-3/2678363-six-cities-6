@@ -2,11 +2,12 @@ import { createReducer } from '@reduxjs/toolkit';
 import { OFFERS } from '../mocks/offers';
 import { changeCity, fillPlacesList, setSortType } from './action';
 import { State } from '../types/state';
+import { SortType } from '../types/sorting';
 
 const initialState: State = {
   city: 'Paris',
   offersList: OFFERS,
-  sortType: 'Popular'
+  sortType: SortType.Popular
 };
 
 const reducer = createReducer(initialState, (builder) => {

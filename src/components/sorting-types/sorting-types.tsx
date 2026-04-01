@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getSortType } from '../../store/selectors';
 import { setSortType } from '../../store/action';
-import { SortOptions } from '../../types/sort-option';
+import { SortOptions, SortType } from '../../types/sorting';
 
 const sortOptions: SortOptions = [
-  { type: 'Popular', label: 'Popular' },
-  { type: 'Price: low to high', label: 'Price: low to high' },
-  { type: 'Price: high to low', label: 'Price: high to low' },
-  { type: 'Top rated first', label: 'Top rated first' }
+  { type: SortType.Popular, label: 'Popular' },
+  { type: SortType.PriceLowToHigh, label: 'Price: low to high' },
+  { type: SortType.PriceHighToLow, label: 'Price: high to low' },
+  { type: SortType.TopRatedFirst, label: 'Top rated first' }
 ];
 
-function SotingType(): JSX.Element {
+function SortingTypes(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentSortType = useAppSelector(getSortType);
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ function SotingType(): JSX.Element {
     setIsOpen(!isOpen);
   };
 
-  const handleSortChange = (sortType: string) => {
+  const handleSortChange = (sortType: SortType) => {
     dispatch(setSortType(sortType));
     setIsOpen(false);
   };
@@ -50,4 +50,4 @@ function SotingType(): JSX.Element {
   );
 }
 
-export default SotingType;
+export default SortingTypes;

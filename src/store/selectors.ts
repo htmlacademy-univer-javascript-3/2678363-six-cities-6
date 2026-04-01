@@ -1,4 +1,5 @@
 import { Offers } from '../types/offer';
+import { SortType } from '../types/sorting';
 import { State } from '../types/state';
 
 export const getCity = (state: State): string => state.city;
@@ -10,8 +11,7 @@ export const getFilteredOffers = (state: State): Offers =>
 
 export const getFilteredOffersCount = (state: State): number => getFilteredOffers(state).length;
 
-export const getSortType = (state: State): string => state.sortType;
-
+export const getSortType = (state: State): SortType => state.sortType;
 
 const sortOffers = (offers: Offers, sortType: string): Offers => {
   switch (sortType) {

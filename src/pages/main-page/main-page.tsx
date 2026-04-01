@@ -8,17 +8,17 @@ import { useAppSelector } from '../../hooks/index.ts';
 import { getCity, getSortedFilteredOffers } from '../../store/selectors.ts';
 import { getPointsFromOffers } from '../../utils.ts';
 import { Offer } from '../../types/offer.ts';
-import SortingType from '../../components/sorting-type/sorting-type.tsx';
+import SortingTypes from '../../components/sorting-types/sorting-types.tsx';
 
 function MainPage(): JSX.Element {
   const currentCityName = useAppSelector(getCity);
-  const sortedfilteredOffers = useAppSelector(getSortedFilteredOffers);
+  const sortedFilteredOffers = useAppSelector(getSortedFilteredOffers);
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
   const currentCity = CITIES.find((city) => city.title === currentCityName) || CITIES[0];
 
-  const points = getPointsFromOffers(sortedfilteredOffers);
+  const points = getPointsFromOffers(sortedFilteredOffers);
 
   const handleListItemHover = (offer: Offer | null) => {
     setSelectedOffer(offer);
@@ -71,11 +71,11 @@ function MainPage(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {sortedfilteredOffers.length} {sortedfilteredOffers.length === 1 ? 'place' : 'places'} to stay in {currentCityName}
+                {sortedFilteredOffers.length} {sortedFilteredOffers.length === 1 ? 'place' : 'places'} to stay in {currentCityName}
               </b>
-              <SortingType />
+              <SortingTypes />
               <PlacesList
-                offers={sortedfilteredOffers}
+                offers={sortedFilteredOffers}
                 onSelect={handleListItemHover}
                 variant={Variant.Cities}
               />
