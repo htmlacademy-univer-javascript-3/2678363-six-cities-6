@@ -1,18 +1,18 @@
 import PlaceCard from '../place-card/place-card';
-import { Offer, Offers } from '../../../types/offer';
+import { Offer, OfferId, Offers } from '../../../types/offer';
 import { useState } from 'react';
 import { Variant } from '../../../const';
 
 type PlacesListProps = {
   offers: Offers;
-  onSelect?: (offer: Offer | null) => void;
+  onSelect?: (offer: Offer | OfferId | null) => void;
   variant?: Variant.Cities | Variant.NearPlaces;
 }
 
 function PlacesList({ offers, onSelect, variant = Variant.Cities }: PlacesListProps): JSX.Element {
-  const [ , setActiveCard ] = useState<Offer | null>(null);
+  const [ , setActiveCard ] = useState<Offer | OfferId | null>(null);
 
-  const handleSelect = (offer: Offer | null) => {
+  const handleSelect = (offer: Offer | OfferId | null) => {
     setActiveCard(offer);
     if (onSelect) {
       onSelect(offer);

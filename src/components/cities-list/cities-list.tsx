@@ -1,4 +1,4 @@
-import { CITIES } from '../../mocks/cities';
+import { CITIES } from '../../const';
 import { getCity } from '../../store/selectors';
 import { changeCity } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -16,17 +16,17 @@ function CitiesList(): JSX.Element {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
-            <li key={city.title} className="locations__item">
+            <li key={city.name} className="locations__item">
               <a className={`locations__item-link tabs__item ${
-                currentCity === city.title ? 'tabs__item--active' : ''
+                currentCity === city.name ? 'tabs__item--active' : ''
               }`}
               href="#"
               onClick={(evt) => {
                 evt.preventDefault();
-                handleCityChange(city.title);
+                handleCityChange(city.name);
               }}
               >
-                <span>{city.title}</span>
+                <span>{city.name}</span>
               </a>
             </li>
           ))}

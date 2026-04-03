@@ -1,11 +1,15 @@
 import { store } from '../store';
-import { Offers } from './offer';
+import { OfferId, Offers, Reviews } from './offer';
 import { SortType } from './sorting';
 
 export type State = {
   city: string;
   offersList: Offers;
   sortType: SortType;
+  isOffersLoading: boolean;
+  currentOffer: OfferId | null;
+  nearOffers: Offers;
+  reviews: Reviews;
 };
 
 export type RootState = ReturnType<typeof store.getState>;

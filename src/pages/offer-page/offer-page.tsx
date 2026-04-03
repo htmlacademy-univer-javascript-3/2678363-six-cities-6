@@ -1,30 +1,54 @@
 import { Link, useParams } from 'react-router-dom';
-import { Offers } from '../../types/offer';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { AppRoute, Variant } from '../../const';
 import ReviewForm from '../../components/reviews/review-form/review-form';
-import { reviews } from '../../mocks/reviews';
 import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
-import { CITIES } from '../../mocks/cities';
-import { nearPoints } from '../../mocks/near-points';
+import { CITIES } from '../../const';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places/places-list/places-list';
-import { nearOffers } from '../../mocks/near-offers';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCurrentOffer, getNearOffers, getReviews } from '../../store/selectors';
+import { fetchNearOffers, fetchOffer, fetchReviews } from '../../store/api-actions';
+import { useEffect } from 'react';
+import { Point, Points } from '../../types/map';
 
-type OfferPageProps = {
-  offers: Offers;
-}
-
-function OfferPage({ offers }: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const {id} = useParams();
-  const offerId = Number(id);
-  const offer = offers.find((item) => item.id === offerId);
+  const dispatch = useAppDispatch();
+  const currentOffer = useAppSelector(getCurrentOffer);
 
-  if (!offer) {
+  const nearOffers = useAppSelector(getNearOffers);
+  const reviews = useAppSelector(getReviews);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOffer(id));
+      dispatch(fetchNearOffers(id));
+      dispatch(fetchReviews(id));
+    }
+  }, [dispatch, id]);
+
+  if (!currentOffer) {
     return <NotFoundPage />;
   }
 
-  const { title, gallery, type, price, bedrooms, adults, isFavorite, rating, goods, host } = offer;
+  const {title, images, type, price, bedrooms, maxAdults, isFavorite, rating, goods, host, location, city} = currentOffer;
+
+  const currentCity = CITIES.find((item) => item.name === city.name) || CITIES[0];
+
+  const currentPoint: Point = {
+    id: id,
+    latitude: location.latitude,
+    longitude: location.longitude,
+  };
+
+  const nearPoints: Points = nearOffers.slice(0, 3).map((offer) => ({
+    id: offer.id,
+    latitude: offer.location.latitude,
+    longitude: offer.location.longitude,
+  }));
+
+  const points: Points = [...nearPoints, currentPoint];
 
   return (
     <div className="page">
@@ -61,7 +85,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {gallery.slice(0, 6).map((image) => (
+              {images.slice(0, 6).map((image) => (
                 <div key={image} className="offer__image-wrapper">
                   <img className="offer__image" src={image} alt="Photo studio" />
                 </div>
@@ -70,9 +94,11 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {currentOffer.isPremium && (
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>
+              )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   {title}
@@ -104,7 +130,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
                   {bedrooms === 1 ? '1 Bedroom' : `${bedrooms} Bedrooms`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  {adults === 1 ? 'Max 1 adult' : `Max ${adults} adults`}
+                  {maxAdults === 1 ? 'Max 1 adult' : `Max ${maxAdults} adults`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -125,7 +151,7 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className={`offer__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''}  user__avatar-wrapper`}>
-                    <img className="offer__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar" />
+                    <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
                     {host.name}
@@ -143,15 +169,16 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList />
+                <ReviewsList reviews={reviews}/>
                 <ReviewForm />
               </section>
             </div>
           </div>
           <section className="offer__map map">
             <Map
-              city={CITIES[3]}
-              points={nearPoints}
+              city={currentCity}
+              points={points}
+              selectedPoint={currentPoint}
               height={579}
               width={1144}
             />
@@ -160,7 +187,10 @@ function OfferPage({ offers }: OfferPageProps): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlacesList offers={nearOffers} variant={Variant.NearPlaces} />
+            <PlacesList
+              offers={nearOffers.slice(0, 3)}
+              variant={Variant.NearPlaces}
+            />
           </section>
         </div>
       </main>

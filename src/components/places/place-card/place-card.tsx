@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Offer } from '../../../types/offer';
+import { Offer, OfferId } from '../../../types/offer';
 import { Variant } from '../../../const';
 
 
 type PlaceCardProps = {
   offer: Offer;
-  onSelect?: (offer: Offer | null) => void;
+  onSelect?: (offer: Offer | OfferId | null) => void;
   variant?: Variant.Cities | Variant.NearPlaces;
 }
 
 function PlaceCard({ offer, onSelect, variant = Variant.Cities }: PlaceCardProps): JSX.Element {
-  const { id, picture, isPremium, price, title, type, isFavorite } = offer;
+  const { id, previewImage, isPremium, price, title, type, isFavorite } = offer;
 
   const handleMouseEnter = () => {
     if (onSelect) {
@@ -57,7 +57,7 @@ function PlaceCard({ offer, onSelect, variant = Variant.Cities }: PlaceCardProps
       )}
       <div className={getImageWrapperClassName()}>
         <a href="#">
-          <img className="place-card__image" src={picture} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">

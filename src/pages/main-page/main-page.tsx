@@ -3,7 +3,7 @@ import PlacesList from '../../components/places/places-list/places-list.tsx';
 import Map from '../../components/map/map.tsx';
 import { Variant } from '../../const.ts';
 import CitiesList from '../../components/cities-list/cities-list.tsx';
-import { CITIES } from '../../mocks/cities.ts';
+import { CITIES } from '../../const.ts';
 import { useAppSelector } from '../../hooks/index.ts';
 import { getCity, getSortedFilteredOffers } from '../../store/selectors.ts';
 import { getPointsFromOffers } from '../../utils.ts';
@@ -16,7 +16,7 @@ function MainPage(): JSX.Element {
 
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
-  const currentCity = CITIES.find((city) => city.title === currentCityName) || CITIES[0];
+  const currentCity = CITIES.find((city) => city.name === currentCityName) || CITIES[0];
 
   const points = getPointsFromOffers(sortedFilteredOffers);
 
@@ -26,9 +26,9 @@ function MainPage(): JSX.Element {
 
   const selectedPoint = selectedOffer
     ? {
-      title: selectedOffer.title,
-      lat: selectedOffer.location.lat,
-      lng: selectedOffer.location.lng
+      id: selectedOffer.id,
+      latitude: selectedOffer.location.latitude,
+      longitude: selectedOffer.location.longitude
     }
     : null;
 
