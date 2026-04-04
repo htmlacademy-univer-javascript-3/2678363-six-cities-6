@@ -2,9 +2,9 @@ import { Offer, Offers } from './types/offer';
 import { Point, Points } from './types/map';
 
 export const getPointFromOffer = (offer: Offer): Point => ({
-  title: offer.title,
-  lat: offer.location.lat,
-  lng: offer.location.lng
+  id: offer.id,
+  latitude: offer.location.latitude,
+  longitude: offer.location.longitude
 });
 
 export const getPointsFromOffers = (offers: Offers): Points =>

@@ -1,39 +1,41 @@
-import { City } from './map';
+import { City, Location } from './map';
 
 export type Host = {
   name: string;
-  avatar: string;
+  avatarUrl: string;
   isPro: boolean;
 }
 
 export type Offer = {
-  id: number;
-  picture: string;
-  gallery: string[];
-  isPremium: boolean;
-  price: number;
+  id: string;
   title: string;
   type: string;
-  bedrooms: number;
-  adults: number;
-  isFavorite: boolean;
-  rating: number;
-  goods: string[];
-  host: Host;
+  price: number;
   city: City;
-  location: {
-    lat: number;
-    lng: number;
-  };
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
 }
 
 export type Offers = Offer[];
 
-export type Review = {
-  id: number;
-  avatar: string;
-  name: string;
-  rate: number;
-  date: string;
+export type OfferId = Offer & {
   description: string;
+  bedrooms: number;
+  goods: string[];
+  host: Host;
+  images: string[];
+  maxAdults: number;
 }
+
+export type Review = {
+  id: string;
+  date: string;
+  user: Host;
+  comment: string;
+  rating: number;
+}
+
+export type Reviews = Review[];

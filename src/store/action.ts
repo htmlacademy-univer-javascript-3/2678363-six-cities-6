@@ -1,8 +1,17 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offers } from '../types/offer';
+import { OfferId, Offers, Reviews } from '../types/offer';
+import { SortType } from '../types/sorting';
 
 export const changeCity = createAction<string>('changeCity');
 
-export const fillPlacesList = createAction<Offers>('fillPlacesList');
+export const loadOffers = createAction<Offers>('loadOffers');
 
-export const setSortType = createAction<string>('setSortType');
+export const setSortType = createAction<SortType>('setSortType');
+
+export const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
+
+export const loadOffer = createAction<OfferId>('loadOffer');
+
+export const loadNearOffers = createAction<Offers>('loadNearOffers');
+
+export const loadReviews = createAction<Reviews>('loadReviews');

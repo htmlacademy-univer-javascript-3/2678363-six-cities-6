@@ -6,10 +6,16 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppSelector } from '../../hooks';
-import { getOffersList } from '../../store/selectors';
+import { getIsOffersLoading, getOffersList } from '../../store/selectors';
+import Spinner from '../spinner/spinner';
 
 function App(): JSX.Element {
   const offers = useAppSelector(getOffersList);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+
+  if (isOffersLoading) {
+    return <Spinner />;
+  }
 
   return (
     <BrowserRouter>
@@ -28,7 +34,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage offers={offers} />}
+          element={<OfferPage />}
         />
         <Route
           path='*'
