@@ -1,6 +1,8 @@
+import { AuthorizationStatus } from '../const';
 import { OfferId, Offers, Reviews } from '../types/offer';
 import { SortType } from '../types/sorting';
 import { State } from '../types/state';
+import { UserData } from '../types/user-data';
 
 export const getCity = (state: State): string => state.city;
 
@@ -39,3 +41,7 @@ export const getCurrentOffer = (state: State): OfferId | null => state.currentOf
 export const getNearOffers = (state: State): Offers => state.nearOffers;
 
 export const getReviews = (state: State): Reviews => state.reviews;
+
+export const getAuthorizationStatus = (state: State): AuthorizationStatus => state.authorizationStatus;
+
+export const getUser = (state: State): UserData | null => state.user;
