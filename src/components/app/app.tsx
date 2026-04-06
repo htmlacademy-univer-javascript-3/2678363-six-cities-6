@@ -1,19 +1,21 @@
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
+import PrivateRoute from '../private-route/private-route';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { useAppSelector } from '../../hooks';
-import { getIsOffersLoading, getOffersList } from '../../store/selectors';
+import { getAuthorizationStatus, getIsOffersLoading, getOffersList } from '../../store/selectors';
 import Spinner from '../spinner/spinner';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const offers = useAppSelector(getOffersList);
   const isOffersLoading = useAppSelector(getIsOffersLoading);
 
-  if (isOffersLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersLoading) {
     return <Spinner />;
   }
 
@@ -30,7 +32,11 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesPage offers={offers} />}
+          element={
+            <PrivateRoute>
+              <FavoritesPage offers={offers} />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Offer}

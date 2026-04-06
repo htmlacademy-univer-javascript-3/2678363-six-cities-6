@@ -1,7 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadOffers, setSortType, setOffersLoadingStatus, loadOffer, loadNearOffers, loadReviews } from './action';
+import {
+  changeCity,
+  loadOffers,
+  setSortType,
+  setOffersLoadingStatus,
+  loadOffer,
+  loadNearOffers,
+  loadReviews,
+  requireAuthorization,
+  setUser
+} from './action';
 import { State } from '../types/state';
 import { SortType } from '../types/sorting';
+import { AuthorizationStatus } from '../const';
 
 const initialState: State = {
   city: 'Paris',
@@ -10,7 +21,9 @@ const initialState: State = {
   isOffersLoading: false,
   currentOffer: null,
   nearOffers: [],
-  reviews: []
+  reviews: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  user: null
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -35,6 +48,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action)=> {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

@@ -13,6 +13,15 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+export enum APIRoute {
+  Login = '/login',
+  Logout = '/logout',
+  Offers = '/offers',
+  Comments = '/comments'
+}
+
+export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+
 export const URL_MARKER_DEFAULT = '/img/pin.svg';
 export const URL_MARKER_CURRENT = '/img/pin-active.svg';
 
@@ -30,7 +39,7 @@ export const CITIES: City[] = [
     location: {
       latitude: 48.856663,
       longitude: 2.350556,
-      zoom: 11
+      zoom: 13
     }
   },
   {
@@ -38,7 +47,7 @@ export const CITIES: City[] = [
     location: {
       latitude: 50.939590,
       longitude: 6.959922,
-      zoom: 12
+      zoom: 13
     }
   },
   {
@@ -46,7 +55,7 @@ export const CITIES: City[] = [
     location: {
       latitude: 50.850283,
       longitude: 4.352131,
-      zoom: 11
+      zoom: 13
     }
   },
   {
@@ -54,7 +63,7 @@ export const CITIES: City[] = [
     location: {
       latitude: 52.376955,
       longitude: 4.893096,
-      zoom: 11
+      zoom: 13
     }
   },
   {
@@ -62,7 +71,7 @@ export const CITIES: City[] = [
     location: {
       latitude: 53.552185,
       longitude: 9.999782,
-      zoom: 12
+      zoom: 13
     }
   },
   {
