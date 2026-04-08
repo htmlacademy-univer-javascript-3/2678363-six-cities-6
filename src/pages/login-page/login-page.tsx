@@ -58,6 +58,7 @@ function LoginPage(): JSX.Element {
                   type="email"
                   name="email"
                   placeholder="Email"
+                  id="login__input"
                   required
                 />
               </div>
@@ -69,6 +70,7 @@ function LoginPage(): JSX.Element {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  id="password__input"
                   required
                 />
               </div>
