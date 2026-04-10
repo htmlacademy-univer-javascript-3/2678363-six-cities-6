@@ -28,7 +28,7 @@ function SortingTypes(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span className="places__sorting-type" tabIndex={0} onClick={handleSortClick}>
+      <span data-testid="sorting-btn" className="places__sorting-type" tabIndex={0} onClick={handleSortClick}>
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
@@ -37,6 +37,7 @@ function SortingTypes(): JSX.Element {
       <ul className={`places__options places__options--custom ${isOpen ? 'places__options--opened' : ''}`}>
         {sortOptions.map((option) => (
           <li
+            data-testid={option.type}
             key={option.type}
             className="places__option places__option--active"
             tabIndex={0}

@@ -53,28 +53,29 @@ function LoginPage(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  data-testid="login"
                   ref={loginRef}
                   className="login__input form__input"
                   type="email"
                   name="email"
                   placeholder="Email"
-                  id="login__input"
                   required
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  data-testid="password"
                   ref={passwordRef}
                   className="login__input form__input"
                   type="password"
                   name="password"
                   placeholder="Password"
-                  id="password__input"
                   required
                 />
               </div>
               <button
+                data-testid="submit"
                 className="login__submit form__submit button"
                 type="submit"
               >

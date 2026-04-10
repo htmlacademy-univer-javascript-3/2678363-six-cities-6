@@ -17,7 +17,7 @@ function CitiesList(): JSX.Element {
         <ul className="locations__list tabs__list">
           {CITIES.map((city) => (
             <li key={city.name} className="locations__item">
-              <a className={`locations__item-link tabs__item ${
+              <a data-testid={city.name} className={`locations__item-link tabs__item ${
                 currentCity === city.name ? 'tabs__item--active' : ''
               }`}
               href="#"

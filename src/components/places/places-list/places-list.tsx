@@ -30,7 +30,7 @@ function PlacesList({ offers, onSelect, variant = Variant.Cities }: PlacesListPr
   };
 
   return (
-    <div className={getContainerClassName()}>
+    <div data-testid="offers-list" className={getContainerClassName()} >
       {offers.map((offer) => (
         <PlaceCard
           key={offer.id}

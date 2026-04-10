@@ -1,12 +1,12 @@
 import { Locator, Page } from '@playwright/test';
 
-export class Authorization {
+export class AuthorizationPage {
   constructor(page: Page, url = 'http://localhost:5173/login') {
     this.url = url;
     this.page = page;
-    this.logInput = this.page.locator('#login__input');
-    this.passInput = this.page.locator('#password__input');
-    this.submitBtn = this.page.locator('.login__submit');
+    this.logInput = this.page.getByTestId('login');
+    this.passInput = this.page.getByTestId('password');
+    this.submitBtn = this.page.getByTestId('submit');
   }
 
   private readonly url: string;
@@ -21,5 +21,15 @@ export class Authorization {
 
   public async load(): Promise<void> {
     await this.page.goto(this.url);
+  }
+
+  public async inputLogin(): Promise<void> {
+    await this.logInput.click();
+    await this.logInput.fill('oliver.conner@gmail.com');
+  }
+
+  public async inputPassword(): Promise<void> {
+    await this.passInput.click();
+    await this.passInput.fill('qwerty123');
   }
 }
